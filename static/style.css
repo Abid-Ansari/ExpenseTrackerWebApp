@@ -1,0 +1,98 @@
+body{
+    background-color: rgb(227, 129, 227);
+}
+
+.workspace{
+   margin : auto;
+   width : 80vw;
+   height: 80vh;
+   border-radius: 10px;
+   margin-top: 5%;
+   background-color: white;
+   border: 3px solid black;
+}
+.expense{
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content:space-between;
+    height: 25%;
+    
+}
+.items{
+    min-width: auto;
+    width: 150px;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 17px;
+}
+.History{
+    height: 400px;
+    min-width: 33%;
+    overflow-y: auto;
+    width: 400px;
+    margin-left: 5px;
+    padding: 0;
+}
+
+table{
+    width: 100%;
+}
+
+td,tr,table,th{
+  border: 1px solid black;
+  text-align: center;
+}
+
+.allContent{
+    display: flex;
+    margin-top: 5%;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#piechart{
+   padding: auto;
+   width: 10px;
+   min-width: 10%;
+   max-width: fit-content;
+}
+
+input{
+    height: 28px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid black ;
+}
+input:hover{
+    border: 3px solid rgb(227, 129, 227);
+}
+
+#submitButton{
+    background-color: rgb(227, 129, 227);
+    border-radius: 25px;
+    margin-right: 10px;
+    height: 50px;
+    margin-top: 15px;
+    width: 120px;
+}
+#submitButton:hover{
+    background-color: rgb(154, 77, 154);
+    transition: 0.2s;
+    color: white;
+    margin-top: 15px;
+}
+
+thead{
+    background-color: rgb(227, 129, 227);
+}
+
+.btn{
+   
+    border-radius: 5px;
+    background-color: rgb(204, 64, 64);
+}
+
+.btn:hover{
+    background-color: red;
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <div class="workspace">
+
+        <form
+            style="display: flex; justify-content:space-between;flex-wrap: wrap; margin-left: 10px;margin-right: 10px; height: 20%;"
+            action="/AddExpense" method="POST">
+            <div class="items">
+                <label for="date" style="display: block;"> Date</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div class="items">
+                <label for="category" style="display: block;">Category</label>
+                <input type="text" id="category" name="category">
+            </div>
+            <div class="items">
+                <label for="amount" style="display: block;">Amount Expensed</label>
+                <input type="number" id="amount" name="amount">
+            </div>
+            <button type="submit" onclick="AddExpense()" id="submitButton">Add
+                Expense</button>
+        </form>
+      
+        <div class="allContent">
+
+        <div class="History">
+            <table>
+                <thead>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+
+                    {% for data in myTable %}
+                    <tr>
+                        <td>{{data.date.strftime('%d-%m-%Y')}}</td>
+                        <td>{{data.category}}</td>
+                        <td>{{data.amount}}</td>
+                        <td>
+                            <a href="/delete/{{data.sno}}"><button class="btn" id="delete"
+                                    onclick="deleteRow()">Delete</button></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+        <div id="pieChart"></div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <script>
+
+
+
+        function ShowHistory() {
+
+        }
+
+        function AddExpense() {
+
+
+
+
+            let table_row = document.createElement('tr')
+
+            let date = document.createElement('td')
+            date.innerHTML = document.getElementById('date').value
+            let category = document.createElement('td')
+            category.innerHTML = document.getElementById('category').value
+            let amount = document.createElement('td')
+            amount.innerHTML = document.getElementById('amount').value
+            let actions = document.createElement('td')
+            actions.innerHTML = ' <button class="btn" id="delete" onclick="deleteRow()">Delete</button> '
+
+            table_row.appendChild(date)
+            table_row.appendChild(category)
+            table_row.appendChild(amount)
+            table_row.appendChild(actions)
+
+            let table_body = document.getElementsByTagName('tbody')[0]
+            console.log(table_body)
+            table_body.appendChild(table_row)
+            console.log(table_body)
+
+
+        }
+
+
+        function deleteRow() {
+            let table_body = document.getElementsByTagName('tbody')[0]
+            let rows = table_body.querySelectorAll('tr')
+            rows.forEach(element => {
+                actions = element.querySelectorAll('td')[3]
+                delButton = actions.querySelectorAll('button')[1]
+                delButton.addEventListener('click', (e) => {
+                    row = e.target.parentNode.parentNode
+                    table_body.removeChild(row)
+                })
+            });
+        }
+
+
+    </script>
+
+    <script type="text/javascript">
+
+        var data = JSON.parse('{{ data | safe }}')
+        var categories = data.map(item => item.category);
+        var amounts = data.map(item => item.amount);
+
+        var plotData = [{ values: amounts, labels: categories, type: 'pie' }];
+        console.log(data)
+        var layout = { autosize: true, margin: { l: 0, r: 20, b: 0, t: 0 },height:300 ,width:400};
+        Plotly.newPlot('pieChart', plotData, layout);
+        window.onresize = function() { 
+            Plotly.relayout('pieChart', { 'xaxis.autorange': true, 'yaxis.autorange': true }); 
+        }
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
