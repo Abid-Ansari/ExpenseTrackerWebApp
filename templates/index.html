@@ -17,15 +17,15 @@
             action="/AddExpense" method="POST">
             <div class="items">
                 <label for="date" style="display: block;"> Date</label>
-                <input type="date" id="date" name="date">
+                <input type="date" id="date" name="date" required>
             </div>
             <div class="items">
                 <label for="category" style="display: block;">Category</label>
-                <input type="text" id="category" name="category">
+                <input type="text" id="category" name="category" required>
             </div>
             <div class="items">
                 <label for="amount" style="display: block;">Amount Expensed</label>
-                <input type="number" id="amount" name="amount">
+                <input type="number" id="amount" name="amount" required>
             </div>
             <button type="submit" onclick="AddExpense()" id="submitButton">Add
                 Expense</button>
@@ -58,7 +58,7 @@
                 </tbody>
             </table>
         </div>
-
+        <div id="barChart"></div>
         <div id="pieChart"></div>
 
         </div>
@@ -138,6 +138,29 @@
         window.onresize = function() { 
             Plotly.relayout('pieChart', { 'xaxis.autorange': true, 'yaxis.autorange': true }); 
         }
+
+
+
+
+        // Plotting the bar graph over here
+
+        var bar_data = JSON.parse('{{bar_graph_data|safe}}')
+        var date = new Date(bar_data.map(item => item.date))
+        var exp = bar_data.map(item => item.amount)
+        console.log(date)
+        var layout_bar = {  margin: { l: 20, r: 0, b: 50, t: 50 },height:300 ,width:200,  title: 'Expenditure per Day',
+                           xaxis:{title:'Date',tickformat: '%Y-%m-%d'} ,yaxis:{title:'Amount' , showticklabels:false}   };
+        console.log(bar_data)
+
+        var plot_data = [{
+            x:date,
+            y:exp,
+            type:"bar",
+            marker: {color:"rgba(0,0,255,0.6)"}
+        }];
+
+        Plotly.newPlot('barChart',plot_data,layout_bar)
+
 
 
     </script>

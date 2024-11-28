@@ -96,3 +96,11 @@ thead{
 .btn:hover{
     background-color: red;
 }
+
+#barChart{
+    overflow-x: auto;
+    width: 250px;
+    height:350px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
