@@ -27,7 +27,7 @@
                 <label for="amount" style="display: block;">Amount Expensed</label>
                 <input type="number" id="amount" name="amount" required>
             </div>
-            <button type="submit" onclick="AddExpense()" id="submitButton">Add
+            <button type="submit" id="submitButton">Add
                 Expense</button>
         </form>
       
@@ -49,8 +49,8 @@
                         <td>{{data.category}}</td>
                         <td>{{data.amount}}</td>
                         <td>
-                            <a href="/delete/{{data.sno}}"><button class="btn" id="delete"
-                                    onclick="deleteRow()">Delete</button></a>
+                             <button class="btn" id="{{data.sno}}"
+                                    onclick="deleteRow(id)">Delete</button></a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -79,47 +79,18 @@
 
         }
 
-        function AddExpense() {
 
+        function deleteRow(id) {
+            if(confirm("Do you want to delete this entry ?")){
+                end_point = '/delete/'+id
+                window.location.href = end_point
+                
+              
 
-
-
-            let table_row = document.createElement('tr')
-
-            let date = document.createElement('td')
-            date.innerHTML = document.getElementById('date').value
-            let category = document.createElement('td')
-            category.innerHTML = document.getElementById('category').value
-            let amount = document.createElement('td')
-            amount.innerHTML = document.getElementById('amount').value
-            let actions = document.createElement('td')
-            actions.innerHTML = ' <button class="btn" id="delete" onclick="deleteRow()">Delete</button> '
-
-            table_row.appendChild(date)
-            table_row.appendChild(category)
-            table_row.appendChild(amount)
-            table_row.appendChild(actions)
-
-            let table_body = document.getElementsByTagName('tbody')[0]
-            console.log(table_body)
-            table_body.appendChild(table_row)
-            console.log(table_body)
-
-
-        }
-
-
-        function deleteRow() {
-            let table_body = document.getElementsByTagName('tbody')[0]
-            let rows = table_body.querySelectorAll('tr')
-            rows.forEach(element => {
-                actions = element.querySelectorAll('td')[3]
-                delButton = actions.querySelectorAll('button')[1]
-                delButton.addEventListener('click', (e) => {
-                    row = e.target.parentNode.parentNode
-                    table_body.removeChild(row)
-                })
-            });
+               
+              
+           }
+           
         }
 
 
@@ -149,7 +120,7 @@
         var exp = bar_data.map(item => item.amount)
         console.log(date)
         var layout_bar = {  margin: { l: 20, r: 0, b: 50, t: 50 },height:300 ,width:200,  title: 'Expenditure per Day',
-                           xaxis:{title:'Date',tickformat: '%Y-%m-%d'} ,yaxis:{title:'Amount' , showticklabels:false}   };
+                           xaxis:{title:'Date',showticklabels:false,tickformat: '%Y-%m-%d'} ,yaxis:{title:'Amount' , showticklabels:false}   };
         console.log(bar_data)
 
         var plot_data = [{

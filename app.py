@@ -62,6 +62,7 @@ def expense_create():
 @app.route("/delete/<int:sno>", methods=["GET", "POST"])
 def delete(sno):
     data = Expenses.query.get(sno)
+    print(data)
     query = db.session.delete(data)
     db.session.commit()
     items = Expenses()
