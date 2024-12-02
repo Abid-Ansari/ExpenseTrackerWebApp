@@ -42,8 +42,8 @@ def main_function():
         bar_graph_df = bar_graph_df.groupby('date')['amount'].sum().reset_index()
         bar_graph_df['date'] = bar_graph_df['date'].apply(lambda x:x.date())
         # sending the data to plot bar and pi - graphs
-        return render_template('index.html',myTable = expense_items , data=pi_graph_df.to_json(orient='records', index=False) ,
-                               bar_graph_data = bar_graph_df.to_json(orient='records', index=False))
+        return render_template('index.html',myTable = expense_items , data=pi_graph_df.to_json(orient='records', index=False,date_format='iso') ,
+                               bar_graph_data = bar_graph_df.to_json(orient='records', index=False,date_format='iso'))
     return render_template('index.html',myTable = expense_items)
 
 

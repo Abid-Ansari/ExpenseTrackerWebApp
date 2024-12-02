@@ -26,9 +26,9 @@ body{
     font-size: 17px;
 }
 .History{
-    height: 400px;
+    height: 300px;
     min-width: 33%;
-    overflow-y: auto;
+    overflow-y: scroll;
     width: 400px;
     margin-left: 5px;
     padding: 0;

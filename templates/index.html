@@ -116,12 +116,12 @@
         // Plotting the bar graph over here
 
         var bar_data = JSON.parse('{{bar_graph_data|safe}}')
-        var date = new Date(bar_data.map(item => item.date))
+        var date = bar_data.map(item => item.date)
         var exp = bar_data.map(item => item.amount)
-        console.log(date)
-        var layout_bar = {  margin: { l: 20, r: 0, b: 50, t: 50 },height:300 ,width:200,  title: 'Expenditure per Day',
-                           xaxis:{title:'Date',showticklabels:false,tickformat: '%Y-%m-%d'} ,yaxis:{title:'Amount' , showticklabels:false}   };
-        console.log(bar_data)
+     
+        var layout_bar = {  margin: { l: 20, r: 0, b: 80, t: 30 },height:300 ,width:200,  title: 'Expenditure per Day',
+                           xaxis:{tickformat: '%Y-%m-%d',tickangle:90} ,yaxis:{title:'Amount' , showticklabels:false}   };
+      
 
         var plot_data = [{
             x:date,
