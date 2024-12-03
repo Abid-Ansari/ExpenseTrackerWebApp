@@ -29,7 +29,7 @@ class Expenses(db.Model):
 def main_function():
     items = Expenses()
     # retreive all the records
-    expense_items = items.query.all()
+    expense_items = items.query.order_by(Expenses.date.desc()).all()
     records = []
     print(records)
     print(expense_items)
