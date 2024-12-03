@@ -30,9 +30,16 @@
             <button type="submit" id="submitButton">Add
                 Expense</button>
         </form>
+<<<<<<< HEAD
         <p class="summary"> Total expenditure this month .  than last year</p>
         <div class="allContent">
        
+=======
+        <p class="summary"> Total expenses this month is : Rs. {{expense_current_month}} which is {{percentage_change}} {{change}}</p>
+        <div class="allContent">
+        
+            <!-- History Div -->
+>>>>>>> 1085e8b94453c1e504224947ac55f9f96c642baf
         <div class="History">
             <table>
                 <thead>
@@ -72,7 +79,6 @@
 
 
     <script>
-
 
 
         function ShowHistory() {
@@ -119,7 +125,11 @@
         var date = bar_data.map(item => item.date)
         var exp = bar_data.map(item => item.amount)
      
+<<<<<<< HEAD
         var layout_bar = {  margin: { l: 60, r: 0, b: 80, t: 30 },height:300 ,width:200,  title: 'Expenditure per Day',
+=======
+        var layout_bar = {  margin: { l: 30, r: 0, b: 80, t: 30 },height:400 ,width:300,  title: 'Expenditure per Day',
+>>>>>>> 1085e8b94453c1e504224947ac55f9f96c642baf
                            xaxis:{tickformat: '%Y-%m-%d',tickangle:90} ,yaxis:{title:'Amount' , showticklabels:true}   };
       
 

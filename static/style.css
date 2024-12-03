@@ -25,14 +25,49 @@ body{
     text-align: center;
     font-size: 17px;
 }
+
+.allContent{
+    display: flex;
+    margin-top: 5%;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.summary{
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    color: rgb(227, 129, 227);
+}
+
 .History{
     height: 300px;
     min-width: 33%;
     overflow-y: scroll;
     width: 400px;
-    margin-left: 5px;
+    margin-left: 2%;
     padding: 0;
 }
+
+#barChart{
+    overflow-x: auto;
+    width: 300px;
+    height:400px;
+    margin-left: 2%;
+    margin-right: 20px;
+    padding: 0;
+}
+
+#piechart{
+    padding: auto;
+    width: 10px;
+    min-width: 10%;
+    height:400px;
+    max-width: fit-content;
+ }
+
+
+
 
 table{
     width: 100%;
@@ -43,20 +78,9 @@ td,tr,table,th{
   text-align: center;
 }
 
-.allContent{
-    display: flex;
-    margin-top: 5%;
-    justify-content: space-between;
-    margin-left: 5%;
-    margin-right: 5%;
-}
 
-#piechart{
-   padding: auto;
-   width: 10px;
-   min-width: 10%;
-   max-width: fit-content;
-}
+
+
 
 input{
     height: 28px;
@@ -97,6 +121,7 @@ thead{
     background-color: red;
 }
 
+<<<<<<< HEAD
 #barChart{
     overflow-x: auto;
     width: 250px;
@@ -110,3 +135,6 @@ thead{
     display: flex;
     justify-content: center;
 }
+=======
+
+>>>>>>> 1085e8b94453c1e504224947ac55f9f96c642baf
