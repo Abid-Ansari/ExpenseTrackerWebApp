@@ -30,20 +30,28 @@ def main_function():
     items = Expenses()
     # retreive all the records
     expense_items = items.query.all()
+    records = []
+    print(records)
+    print(expense_items)
+    #print(records.to_json())
     pi_graph = []
     bar_graph = []
     for d in expense_items:
         pi_graph.append({'category':d.category,'amount':d.amount})
         bar_graph.append({'date':d.date,'amount':d.amount})
+        records.append({'date':d.date,'category':d.category,'amount':d.amount})
     pi_graph_df = pd.DataFrame(pi_graph)
     bar_graph_df = pd.DataFrame(bar_graph)
+    records_df = pd.DataFrame(records)
+    print(records_df)
+    print(records_df.to_json(orient='records', date_format='iso'))
     if len(pi_graph_df)>0:
         pi_graph_df = pi_graph_df.groupby('category')['amount'].sum().reset_index()
         bar_graph_df = bar_graph_df.groupby('date')['amount'].sum().reset_index()
         bar_graph_df['date'] = bar_graph_df['date'].apply(lambda x:x.date())
         # sending the data to plot bar and pi - graphs
         return render_template('index.html',myTable = expense_items , data=pi_graph_df.to_json(orient='records', index=False) ,
-                               bar_graph_data = bar_graph_df.to_json(orient='records', index=False))
+                               bar_graph_data = bar_graph_df.to_json(orient='records', index=False,date_format='iso'))
     return render_template('index.html',myTable = expense_items)
 
 
