@@ -30,9 +30,9 @@
             <button type="submit" id="submitButton">Add
                 Expense</button>
         </form>
-      
+        <p class="summary"> Total expenditure this month .  than last year</p>
         <div class="allContent">
-
+       
         <div class="History">
             <table>
                 <thead>
@@ -119,8 +119,8 @@
         var date = bar_data.map(item => item.date)
         var exp = bar_data.map(item => item.amount)
      
-        var layout_bar = {  margin: { l: 20, r: 0, b: 80, t: 30 },height:300 ,width:200,  title: 'Expenditure per Day',
-                           xaxis:{tickformat: '%Y-%m-%d',tickangle:90} ,yaxis:{title:'Amount' , showticklabels:false}   };
+        var layout_bar = {  margin: { l: 60, r: 0, b: 80, t: 30 },height:300 ,width:200,  title: 'Expenditure per Day',
+                           xaxis:{tickformat: '%Y-%m-%d',tickangle:90} ,yaxis:{title:'Amount' , showticklabels:true}   };
       
 
         var plot_data = [{
