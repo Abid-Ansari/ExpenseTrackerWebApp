@@ -33,6 +33,12 @@ body{
     margin-left: 5%;
     margin-right: 5%;
 }
+.summary{
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    color: rgb(227, 129, 227);
+}
 
 .History{
     height: 400px;

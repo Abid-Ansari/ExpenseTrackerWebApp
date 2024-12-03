@@ -43,6 +43,26 @@ def main_function():
     pi_graph_df = pd.DataFrame(pi_graph)
     bar_graph_df = pd.DataFrame(bar_graph)
     records_df = pd.DataFrame(records)
+    records_df['date']=pd.to_datetime(records_df['date'])
+    current_month = records_df['date'].dt.month.max()
+    expense_current_month = records_df[records_df['date'].dt.month == current_month]['amount'].sum()
+    no_of_days_current_month = records_df[records_df['date'].dt.month == current_month]['date'].nunique()
+    expense_previous_month = records_df[records_df['date'].dt.month == current_month-1]['amount'].sum()
+    no_of_days_previous_month = records_df[records_df['date'].dt.month == current_month-1]['date'].nunique()
+    print(expense_previous_month)
+    percentage_change = (expense_current_month/no_of_days_current_month - expense_previous_month/no_of_days_previous_month)/(expense_previous_month/no_of_days_previous_month)
+    percentage_change = percentage_change * 100
+    change = ""
+    if percentage_change > 0:
+        change = "higher than last month daily expenses"
+    elif percentage_change<0:
+        change = "lower than last month daily expenses"
+    else:
+        change= "no change from last month daily expenses"
+    
+    percentage_change = format(abs(percentage_change),".2f")
+    
+    print(current_month)
     print(records_df)
     print(records_df.to_json(orient='records', date_format='iso'))
     if len(pi_graph_df)>0:
@@ -51,7 +71,7 @@ def main_function():
         bar_graph_df['date'] = bar_graph_df['date'].apply(lambda x:x.date())
         # sending the data to plot bar and pi - graphs
         return render_template('index.html',myTable = expense_items , data=pi_graph_df.to_json(orient='records', index=False) ,
-                               bar_graph_data = bar_graph_df.to_json(orient='records', index=False,date_format='iso'))
+                               bar_graph_data = bar_graph_df.to_json(orient='records', index=False,date_format='iso'),percentage_change=percentage_change,change=change,expense_current_month=expense_current_month)
     return render_template('index.html',myTable = expense_items)
 
 
